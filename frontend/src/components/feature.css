@@ -1,0 +1,77 @@
+/* ------------------------------------------------------------------
+   Shared components: notification bell, camera scanner,
+   QR code box and a few small helpers used across the modules.
+   ------------------------------------------------------------------ */
+
+.block { display: grid; gap: 6px; min-width: 0; }
+
+.field-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+}
+
+.stat-grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 760px) {
+  .stat-grid.cols-2 { grid-template-columns: 1fr; }
+}
+
+.badge-teal { background: var(--teal-50); color: var(--teal-600); border-color: #99f6e4; }
+
+/* ---------- notification bell ---------- */
+.notify-wrap { position: relative; display: flex; }
+
+.icon-button {
+  position: relative; display: inline-grid; place-items: center;
+  width: 40px; height: 40px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.08); color: #fff; cursor: pointer;
+}
+.icon-button:hover { background: rgba(255, 255, 255, 0.18); }
+.icon-button svg { width: 20px; height: 20px; }
+
+.notify-count {
+  position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px; padding: 0 6px;
+  border-radius: 999px; background: #ef4444; color: #fff; font-size: 11px; font-weight: 700;
+  display: grid; place-items: center; border: 2px solid var(--navy-800, #0b2447);
+}
+
+.notify-panel {
+  position: absolute; right: 0; top: calc(100% + 10px); z-index: 70; width: 360px; max-width: calc(100vw - 32px);
+  background: #fff; color: var(--text); border: 1px solid var(--line); border-radius: 14px;
+  box-shadow: var(--shadow-md); overflow: hidden;
+}
+.notify-head {
+  display: flex; justify-content: space-between; align-items: center; padding: 14px 16px;
+  border-bottom: 1px solid var(--line-soft, var(--line)); font-size: 14px;
+}
+.notify-empty { padding: 28px 16px; text-align: center; color: var(--muted); font-size: 13px; }
+.notify-list { list-style: none; margin: 0; padding: 0; max-height: 380px; overflow-y: auto; }
+.notify-list li { padding: 12px 16px; border-bottom: 1px solid var(--line-soft, var(--line)); }
+.notify-list li:last-child { border-bottom: 0; }
+.notify-list li.is-new { background: var(--blue-50); }
+.notify-title { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 13px; color: var(--ink); }
+.notify-msg { margin-top: 4px; font-size: 12.5px; color: var(--text); line-height: 1.45; }
+.notify-time { margin-top: 4px; font-size: 11px; color: var(--muted); }
+
+/* ---------- camera scanner ---------- */
+.scanner {
+  position: relative; width: 100%; aspect-ratio: 4 / 3; border-radius: 12px; overflow: hidden;
+  background: #0f172a; display: grid; place-items: center;
+}
+.scanner-video { width: 100%; height: 100%; object-fit: cover; }
+.scanner-frame {
+  position: absolute; inset: 18%; border: 2px solid #22c55e; border-radius: 14px;
+  box-shadow: 0 0 0 999px rgba(15, 23, 42, 0.25);
+}
+.scanner-msg { position: absolute; inset: 0; display: grid; place-items: center; padding: 16px; color: #e2e8f0; text-align: center; }
+.scanner-msg .alert { max-width: 420px; }
+
+/* ---------- QR code drawing ---------- */
+.qr-box { background: #fff; padding: 8px; border-radius: 8px; border: 1px solid var(--line); }
+.qr-box svg { display: block; }
+.qr-error { display: grid; place-items: center; color: var(--red); font-size: 12px; text-align: center; }
+
+/* ---------- responsive two-column page layouts ---------- */
+.page-main > * { min-width: 0; }
+.page-main.split-layout { grid-template-columns: var(--split-cols, 1fr); align-items: start; }
+@media (max-width: 900px) {
+  .page-main.split-layout { grid-template-columns: 1fr !important; }
+}

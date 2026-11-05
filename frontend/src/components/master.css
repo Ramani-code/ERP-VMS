@@ -1,0 +1,59 @@
+/* ------------------------------------------------------------------
+   Master module: dropdown in the top navigation + module tabs
+   ------------------------------------------------------------------ */
+
+/* Dropdown trigger sits inside the nav row and mirrors .nav-item */
+.master-menu { position: relative; display: flex; }
+.nav-dropdown-btn {
+  display: inline-flex; align-items: center; gap: 8px; height: 46px; padding: 0 14px;
+  background: transparent; border: 0; border-bottom: 3px solid transparent;
+  color: var(--muted); font-weight: 600; font-size: 13px; white-space: nowrap;
+}
+.nav-dropdown-btn:hover { color: var(--ink); background: var(--blue-50); }
+.nav-dropdown-btn.active { color: var(--blue-700); border-bottom-color: var(--blue-600); }
+.nav-dropdown-btn .caret {
+  width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent;
+  border-top: 5px solid currentColor; transition: transform 0.15s;
+}
+.nav-dropdown-btn[aria-expanded='true'] .caret { transform: rotate(180deg); }
+
+/* Fixed positioning escapes the nav row's overflow-x clipping */
+.nav-dropdown-menu {
+  position: fixed; z-index: 60; width: 290px; padding: 6px;
+  background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow-md);
+}
+.nav-dropdown-head {
+  padding: 8px 10px 6px; font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+}
+.nav-dropdown-item {
+  display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: 8px;
+  text-decoration: none; color: var(--text);
+}
+.nav-dropdown-item:hover,
+.nav-dropdown-item.active { background: var(--blue-50); }
+.nav-dropdown-item strong { display: block; font-size: 13px; color: var(--ink); }
+.nav-dropdown-item.active strong { color: var(--blue-700); }
+.nav-dropdown-item small { display: block; font-size: 11px; color: var(--muted); margin-top: 2px; }
+.nav-dropdown-icon {
+  width: 34px; height: 34px; flex: none; border-radius: 9px;
+  display: grid; place-items: center; background: var(--blue-100); color: var(--blue-700);
+}
+.nav-dropdown-icon svg { width: 18px; height: 18px; }
+
+/* Module tabs on the Master page (replaces the old inline-styled pills) */
+.master-tabs {
+  display: flex; flex-wrap: wrap; gap: 8px; padding: 18px 32px 0;
+}
+.master-tab {
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 9px;
+  border: 1px solid #cbd5e1; background: #fff; color: var(--text);
+  font-weight: 600; font-size: 13px; text-decoration: none;
+}
+.master-tab:hover { background: var(--blue-50); }
+.master-tab.active { background: var(--blue-50); border-color: var(--blue-600); color: var(--blue-700); }
+.master-tab svg { width: 16px; height: 16px; }
+
+@media (max-width: 640px) {
+  .master-tabs { padding: 16px 16px 0; }
+}
